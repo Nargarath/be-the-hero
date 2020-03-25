@@ -1,15 +1,15 @@
 import {Service} from "typedi";
-import { Ong } from "../models/ong";
+import { OngModel } from "../models/OngModel";
 import crypto from "crypto";
 import {connection} from "../database/connection";
 
 @Service()
 export class OngRepository {
-    private ongs: Ong[] = [];
-    private lastOngFetched: Ong = null;
+    private ongs: OngModel[] = [];
+    private lastOngFetched: OngModel = null;
 
     async save(name: string, email: string, whatsapp: string,city: string,uf: string) {
-        const ong  = new Ong(name,email,whatsapp,city,uf).toJSON();
+        const ong  = new OngModel(name,email,whatsapp,city,uf).toJSON();
         await connection('ongs').insert(ong);
         return ong.id;
     }

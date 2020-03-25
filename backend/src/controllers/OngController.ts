@@ -1,7 +1,7 @@
 import { JsonController, OnUndefined, Param, Body, Get, Post, Put, Delete } from "routing-controllers";
 import { Service } from 'typedi';
-import {OngRepository} from "../repositories/ong";
-import {Ong} from "../models/ong";
+import {OngRepository} from "../repositories/OngRepository";
+import {OngModel} from "../models/OngModel";
 
 @Service()
 @JsonController()
@@ -11,12 +11,12 @@ export class OngController {
     }
 
     @Get("/ongs")
-    all(): Promise<Ong[]>  {
+    all(): Promise<OngModel[]>  {
         return this.ongRepository.fetchAll();
     }
 
     @Get("/ongs/:id")
-    one(@Param('id') id: string): Promise<Ong> {
+    one(@Param('id') id: string): Promise<OngModel> {
         return this.ongRepository.fetchOne(id);
     }
 

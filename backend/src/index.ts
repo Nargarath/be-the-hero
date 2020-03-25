@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import { Container } from "typedi";
 import {useExpressServer, useContainer, createExpressServer} from "routing-controllers";
-import { OngController } from "./controllers/ong";
+import { OngController } from "./controllers/OngController";
 
 
 useContainer(Container);

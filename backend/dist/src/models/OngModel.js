@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const crypto_1 = __importDefault(require("crypto"));
 const class_validator_1 = require("class-validator");
-class Ong {
+class OngModel {
     constructor(name, email, whatsapp, city, uf, id) {
         this.id = id ? id : this.idGenerate();
         this.name = name;
@@ -40,6 +40,6 @@ class Ong {
 __decorate([
     class_validator_1.IsEmail(),
     __metadata("design:type", String)
-], Ong.prototype, "email", void 0);
-exports.Ong = Ong;
-//# sourceMappingURL=ong.js.map
+], OngModel.prototype, "email", void 0);
+exports.OngModel = OngModel;
+//# sourceMappingURL=OngModel.js.map

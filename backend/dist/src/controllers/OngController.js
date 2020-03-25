@@ -14,7 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
 const typedi_1 = require("typedi");
-const ong_1 = require("../repositories/ong");
+const OngRepository_1 = require("../repositories/OngRepository");
 let OngController = class OngController {
     constructor(ongRepository) {
         this.ongRepository = ongRepository;
@@ -53,7 +53,7 @@ __decorate([
 OngController = __decorate([
     typedi_1.Service(),
     routing_controllers_1.JsonController(),
-    __metadata("design:paramtypes", [ong_1.OngRepository])
+    __metadata("design:paramtypes", [OngRepository_1.OngRepository])
 ], OngController);
 exports.OngController = OngController;
-//# sourceMappingURL=ong.js.map
+//# sourceMappingURL=OngController.js.map

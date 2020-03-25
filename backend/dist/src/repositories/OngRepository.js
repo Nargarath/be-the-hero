@@ -16,7 +16,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typedi_1 = require("typedi");
-const ong_1 = require("../models/ong");
+const OngModel_1 = require("../models/OngModel");
 const connection_1 = require("../database/connection");
 let OngRepository = class OngRepository {
     constructor() {
@@ -25,7 +25,7 @@ let OngRepository = class OngRepository {
     }
     save(name, email, whatsapp, city, uf) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ong = new ong_1.Ong(name, email, whatsapp, city, uf).toJSON();
+            const ong = new OngModel_1.OngModel(name, email, whatsapp, city, uf).toJSON();
             yield connection_1.connection('ongs').insert(ong);
             return ong.id;
         });
@@ -47,4 +47,4 @@ OngRepository = __decorate([
     typedi_1.Service()
 ], OngRepository);
 exports.OngRepository = OngRepository;
-//# sourceMappingURL=ong.js.map
+//# sourceMappingURL=OngRepository.js.map
