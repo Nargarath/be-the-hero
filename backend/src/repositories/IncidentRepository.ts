@@ -10,8 +10,8 @@ export class IncidentRepository {
 
     async save(title?: string, description?: string, value?: number,ong_id?: string) {
         const incident  = new Incident(title,description,value,ong_id).toJSON();
-        await connection('incidents').insert(incident);
-        return incident.id;
+        const [id] = await connection('incidents').insert(incident);
+        return id;
     }
 
     async fetchOne(id: string) {
