@@ -10,7 +10,8 @@ const port = process.env.SERVER_PORT;
 const app = express_1.default();
 app.get("/", (request, response) => {
     return response.json({
-        evento: 'semana omnistack'
+        evento: 'semana omnistack',
+        teste: ''
     });
 });
 app.listen(port, () => {
