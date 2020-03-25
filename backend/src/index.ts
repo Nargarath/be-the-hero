@@ -1,21 +1,14 @@
 import express from "express";
 import dotenv from "dotenv";
-
+import routes from "./routes";
 
 dotenv.config();
 
 const port = process.env.SERVER_PORT;
 
 const app = express();
+app.use(express.json());
+app.use(routes);
 
-app.get( "/", ( request , response ) => {
-    return response.json( {
-        evento: 'semana omnistack',
-        teste: ''
-    });
-} );
+app.listen( port );
 
-app.listen( port, () => {
-    // tslint:disable-next-line:no-console
-    console.log( `server started at http://localhost:${ port }` );
-} );
