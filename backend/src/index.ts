@@ -1,14 +1,27 @@
-import express from "express";
+import "reflect-metadata";
 import dotenv from "dotenv";
-import routes from "./routes";
+import bodyParser from "body-parser";
+import { Container } from "typedi";
+import {useExpressServer, useContainer, createExpressServer} from "routing-controllers";
+import { OngController } from "./controllers/ong";
+
+
+useContainer(Container);
 
 dotenv.config();
 
 const port = process.env.SERVER_PORT;
 
-const app = express();
-app.use(express.json());
-app.use(routes);
+const app = createExpressServer({
+    routePrefix: "/api",
+    controllers: [OngController]
+});
 
-app.listen( port );
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.listen( port, () => {
+    // tslint:disable-next-line:no-console
+    console.log(`app working on port: ${port}`)
+} );
 
