@@ -5,7 +5,7 @@ import {Incident} from "../models/Incident";
 
 @Service()
 @JsonController()
-export class OngController {
+export class IncidentController {
 
     constructor(private incidentRepository: IncidentRepository) {
     }

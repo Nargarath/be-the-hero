@@ -9,12 +9,16 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const typedi_1 = require("typedi");
 const routing_controllers_1 = require("routing-controllers");
 const OngController_1 = require("./controllers/OngController");
+const IncidentController_1 = require("./controllers/IncidentController");
 routing_controllers_1.useContainer(typedi_1.Container);
 dotenv_1.default.config();
 const port = process.env.SERVER_PORT;
 const app = routing_controllers_1.createExpressServer({
     routePrefix: "/api",
-    controllers: [OngController_1.OngController]
+    controllers: [
+        OngController_1.OngController,
+        IncidentController_1.IncidentController
+    ]
 });
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));

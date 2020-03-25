@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import { Container } from "typedi";
 import {useExpressServer, useContainer, createExpressServer} from "routing-controllers";
 import { OngController } from "./controllers/OngController";
+import { IncidentController } from "./controllers/IncidentController";
 
 
 useContainer(Container);
@@ -14,7 +15,10 @@ const port = process.env.SERVER_PORT;
 
 const app = createExpressServer({
     routePrefix: "/api",
-    controllers: [OngController]
+    controllers: [
+        OngController,
+        IncidentController
+    ]
 });
 
 app.use(bodyParser.json());

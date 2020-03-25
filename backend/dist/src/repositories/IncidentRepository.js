@@ -16,35 +16,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typedi_1 = require("typedi");
-const Ong_1 = require("../models/Ong");
+const Incident_1 = require("../models/Incident");
 const connection_1 = require("../database/connection");
-let OngRepository = class OngRepository {
+let IncidentRepository = class IncidentRepository {
     constructor() {
-        this.ongs = [];
-        this.lastOngFetched = null;
+        this.incidents = [];
+        this.lastIncidentFetched = null;
     }
-    save(name, email, whatsapp, city, uf) {
+    save(title, description, value, ong_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ong = new Ong_1.Ong(name, email, whatsapp, city, uf).toJSON();
-            yield connection_1.connection('ongs').insert(ong);
-            return ong.id;
+            const incident = new Incident_1.Incident(title, description, value, ong_id).toJSON();
+            yield connection_1.connection('incidents').insert(incident);
+            return incident.id;
         });
     }
     fetchOne(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            this.lastOngFetched = yield connection_1.connection('ongs').where('id', id).first();
-            return this.lastOngFetched;
+            this.lastIncidentFetched = yield connection_1.connection('incidents').where('id', id).first();
+            return this.lastIncidentFetched;
         });
     }
     fetchAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.ongs = yield connection_1.connection('ongs').select('*');
-            return this.ongs;
+            this.incidents = yield connection_1.connection('incidents').select('*');
+            return this.incidents;
         });
     }
 };
-OngRepository = __decorate([
+IncidentRepository = __decorate([
     typedi_1.Service()
-], OngRepository);
-exports.OngRepository = OngRepository;
-//# sourceMappingURL=OngRepository.js.map
+], IncidentRepository);
+exports.IncidentRepository = IncidentRepository;
+//# sourceMappingURL=IncidentRepository.js.map
