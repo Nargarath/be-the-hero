@@ -2,7 +2,7 @@ import crypto from "crypto";
 import {connection} from "../database/connection";
 import {IsEmail} from "class-validator";
 
-export class OngModel {
+export class Ong {
     id?: string;
     name: string;
     @IsEmail()
