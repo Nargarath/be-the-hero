@@ -8,13 +8,19 @@
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node --inspect=5858 -r ts-node/register ./src/index.ts",
-    "start:watch": "nodemon"
+    "start:watch": "nodemon",
+    "migrate:make": "ts-node ./node_modules/.bin/knex migrate:make --knexfile  ./knexfile.ts",
+    "db:migrate": "npx knex migrate:latest --knexfile  ./knexfile.ts",
+    "db:rollback": "npx knex migrate:rollback --knexfile  ./knexfile.ts",
+    "db:seed": "npx knex seed:run --knexfile  ./knexfile.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "knex": "^0.20.13",
+    "sqlite3": "^4.1.1"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
