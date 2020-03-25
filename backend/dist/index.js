@@ -5,17 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const routes_1 = __importDefault(require("./routes"));
 dotenv_1.default.config();
 const port = process.env.SERVER_PORT;
 const app = express_1.default();
-app.get("/", (request, response) => {
-    return response.json({
-        evento: 'semana omnistack',
-        teste: ''
-    });
-});
-app.listen(port, () => {
-    // tslint:disable-next-line:no-console
-    console.log(`server started at http://localhost:${port}`);
-});
+app.use(express_1.default.json());
+app.use(routes_1.default);
+app.listen(port);
 //# sourceMappingURL=index.js.map
