@@ -24,4 +24,37 @@ export class IncidentRepository {
         return this.incidents;
     }
 
+    async paginate(limit = 5, page = 1) {
+        const [totalItems] = await connection('incidents').count();
+        const nowPage = page;
+        const [nowPageItemsCount] = await connection('incidents')
+            .join('ongs', 'ongs.id','=','incidents.ong_id')
+            .limit(limit)
+            .offset((page - 1) * limit)
+            .select('*')
+            .count();
+        const totalPages =  Math.floor(totalItems['count(*)']/limit);
+        this.incidents = await connection('incidents')
+            .join('ongs', 'ongs.id','=','incidents.ong_id')
+            .limit(limit)
+            .offset((page - 1) * limit)
+            .select([
+                'indicents.*',
+                'ongs.name',
+                'ongs.email',
+                'ongs.whatsapp',
+                'ongs.city',
+                'ongs.uf'
+            ]);
+        return {
+            totalItems: totalItems['count(*)'],
+            page: {
+                now: nowPage,
+                total: totalPages,
+                itemsCount: nowPageItemsCount['count(*)']
+            },
+            data: this.incidents
+        };
+    }
+
 }

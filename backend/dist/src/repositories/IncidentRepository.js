@@ -26,8 +26,8 @@ let IncidentRepository = class IncidentRepository {
     save(title, description, value, ong_id) {
         return __awaiter(this, void 0, void 0, function* () {
             const incident = new Incident_1.Incident(title, description, value, ong_id).toJSON();
-            yield connection_1.connection('incidents').insert(incident);
-            return incident.id;
+            const [id] = yield connection_1.connection('incidents').insert(incident);
+            return id;
         });
     }
     fetchOne(id) {
@@ -40,6 +40,40 @@ let IncidentRepository = class IncidentRepository {
         return __awaiter(this, void 0, void 0, function* () {
             this.incidents = yield connection_1.connection('incidents').select('*');
             return this.incidents;
+        });
+    }
+    paginate(limit = 5, page = 1) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const [totalItems] = yield connection_1.connection('incidents').count();
+            const nowPage = page;
+            const [nowPageItemsCount] = yield connection_1.connection('incidents')
+                .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
+                .limit(limit)
+                .offset((page - 1) * limit)
+                .select('*')
+                .count();
+            const totalPages = Math.floor(totalItems['count(*)'] / limit);
+            this.incidents = yield connection_1.connection('incidents')
+                .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
+                .limit(limit)
+                .offset((page - 1) * limit)
+                .select([
+                'indicents.*',
+                'ongs.name',
+                'ongs.email',
+                'ongs.whatsapp',
+                'ongs.city',
+                'ongs.uf'
+            ]);
+            return {
+                totalItems: totalItems['count(*)'],
+                page: {
+                    now: nowPage,
+                    total: totalPages,
+                    itemsCount: nowPageItemsCount['count(*)']
+                },
+                data: this.incidents
+            };
         });
     }
 };

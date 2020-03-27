@@ -14,8 +14,12 @@ export class OngRepository {
         return ong.id;
     }
 
-    async fetchOne(id: string) {
-        this.lastOngFetched = await connection('ongs').where('id', id).first();
+    async fetchOne(id: string, columns?: string[]) {
+        this.lastOngFetched = await connection('ongs')
+            .column(columns ? columns : '*')
+            .select()
+            .where('id', id)
+            .first();
         return this.lastOngFetched;
     }
 

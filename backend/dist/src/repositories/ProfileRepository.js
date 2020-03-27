@@ -16,39 +16,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typedi_1 = require("typedi");
-const Ong_1 = require("../models/Ong");
 const connection_1 = require("../database/connection");
-let OngRepository = class OngRepository {
+let ProfileRepository = class ProfileRepository {
     constructor() {
-        this.ongs = [];
-        this.lastOngFetched = null;
+        this.incidents = [];
+        this.lastIncidentFetched = null;
     }
-    save(name, email, whatsapp, city, uf) {
+    incidentsFromOng(ong_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ong = new Ong_1.Ong(name, email, whatsapp, city, uf).toJSON();
-            yield connection_1.connection('ongs').insert(ong);
-            return ong.id;
-        });
-    }
-    fetchOne(id, columns) {
-        return __awaiter(this, void 0, void 0, function* () {
-            this.lastOngFetched = yield connection_1.connection('ongs')
-                .column(columns ? columns : '*')
-                .select()
-                .where('id', id)
-                .first();
-            return this.lastOngFetched;
-        });
-    }
-    fetchAll() {
-        return __awaiter(this, void 0, void 0, function* () {
-            this.ongs = yield connection_1.connection('ongs').select('*');
-            return this.ongs;
+            this.incidents = yield connection_1.connection('incidents')
+                .where('ong_id', ong_id)
+                .select('*');
+            return this.incidents;
         });
     }
 };
-OngRepository = __decorate([
+ProfileRepository = __decorate([
     typedi_1.Service()
-], OngRepository);
-exports.OngRepository = OngRepository;
-//# sourceMappingURL=OngRepository.js.map
+], ProfileRepository);
+exports.ProfileRepository = ProfileRepository;
+//# sourceMappingURL=ProfileRepository.js.map

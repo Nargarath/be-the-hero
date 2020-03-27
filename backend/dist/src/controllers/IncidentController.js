@@ -19,7 +19,22 @@ let IncidentController = class IncidentController {
     constructor(incidentRepository) {
         this.incidentRepository = incidentRepository;
     }
-    all() {
+    all(requestBody) {
+        if (requestBody.hasOwnProperty("paginate") && requestBody.paginate && requestBody.hasOwnProperty("limit") && requestBody.hasOwnProperty("page")) {
+            const { limit, page } = requestBody;
+            return this.incidentRepository.paginate(limit, page);
+        }
+        else if (requestBody.hasOwnProperty("paginate") && requestBody.paginate && requestBody.hasOwnProperty("limit")) {
+            const { limit } = requestBody;
+            return this.incidentRepository.paginate(limit);
+        }
+        else if (requestBody.hasOwnProperty("paginate") && requestBody.paginate && requestBody.hasOwnProperty("page")) {
+            const { page } = requestBody;
+            return this.incidentRepository.paginate(page);
+        }
+        else {
+            return this.incidentRepository.paginate();
+        }
         return this.incidentRepository.fetchAll();
     }
     one(id) {
@@ -32,8 +47,9 @@ let IncidentController = class IncidentController {
 };
 __decorate([
     routing_controllers_1.Get("/incidents"),
+    __param(0, routing_controllers_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], IncidentController.prototype, "all", null);
 __decorate([

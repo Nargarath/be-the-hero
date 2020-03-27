@@ -5,6 +5,8 @@ import { Container } from "typedi";
 import {useExpressServer, useContainer, createExpressServer} from "routing-controllers";
 import { OngController } from "./controllers/OngController";
 import { IncidentController } from "./controllers/IncidentController";
+import {ProfileController} from "./controllers/ProfileController";
+import {SessionController} from "./controllers/SessionController";
 
 
 useContainer(Container);
@@ -15,9 +17,12 @@ const port = process.env.SERVER_PORT;
 
 const app = createExpressServer({
     routePrefix: "/api",
+    cors: true,
     controllers: [
         OngController,
-        IncidentController
+        IncidentController,
+        ProfileController,
+        SessionController
     ]
 });
 

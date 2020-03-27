@@ -10,14 +10,19 @@ const typedi_1 = require("typedi");
 const routing_controllers_1 = require("routing-controllers");
 const OngController_1 = require("./controllers/OngController");
 const IncidentController_1 = require("./controllers/IncidentController");
+const ProfileController_1 = require("./controllers/ProfileController");
+const SessionController_1 = require("./controllers/SessionController");
 routing_controllers_1.useContainer(typedi_1.Container);
 dotenv_1.default.config();
 const port = process.env.SERVER_PORT;
 const app = routing_controllers_1.createExpressServer({
     routePrefix: "/api",
+    cors: true,
     controllers: [
         OngController_1.OngController,
-        IncidentController_1.IncidentController
+        IncidentController_1.IncidentController,
+        ProfileController_1.ProfileController,
+        SessionController_1.SessionController
     ]
 });
 app.use(body_parser_1.default.json());
