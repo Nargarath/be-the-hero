@@ -1,0 +1,63 @@
+@import '../../styles/variables';
+
+.profile-container {
+  width: 100%;
+  max-width: 1118px;
+  padding: 0;
+  height: 100vh;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 33px 0;
+
+    .box {
+      &-left {
+        display: flex;
+        align-items: center;
+        img {
+          width: 144px;
+          height: 62px;
+          margin-right: 48px;
+        }
+        p {
+          font-family: $fontName;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 20px;
+          line-height: 18px;
+        }
+
+      }
+      &-right {
+        display: flex;
+        flex-display: row;
+        align-items: center;
+        max-width: 346px;
+        .button {
+          &#new-incident {
+            margin-right: 24px;
+            margin-top: 0;
+            width: 262px;
+          }
+        }
+        #logout {
+          width: 60px;
+          height: 60px;
+          border: 1.5px solid $input-line;
+          padding: 16px;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+
+
+}
+
