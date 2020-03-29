@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.scss';
-import { FiPower } from 'react-icons/fi';
+import { FiPower, FiPlus } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import logoImg from '../../assets/svg/logo.svg';
 import IncidentBox from "../../components/IncidentBox";
@@ -14,8 +14,8 @@ export default function Profile() {
                  <p>Bem vinda,  APAD</p>
              </div>
              <div className="box-right">
-                 <Link to="/register-incident" className="button" id="new-incident">
-                     Cadastrar novo caso
+                 <Link to="/register-incident" className="button" id="new-incident" >
+                     <FiPlus size={24} color="#fff" />
                  </Link>
                  <Link to="/"  id="logout">
                      <FiPower size={24} color="#E02041" />
@@ -32,19 +32,19 @@ export default function Profile() {
                     value={120.00}
                 />
                  <IncidentBox
-                     id={11}
+                     id={12}
                      title={'Cadelinha atropelada'}
                      description={'A cadelinha Jolie foi atropelada por um carro no bairro Santana e teve que passar por uma cirurgia às pressas.'}
                      value={120.00}
                  />
                  <IncidentBox
-                     id={11}
+                     id={13}
                      title={'Cadelinha atropelada'}
                      description={'A cadelinha Jolie foi atropelada por um carro no bairro Santana e teve que passar por uma cirurgia às pressas.'}
                      value={120.00}
                  />
                  <IncidentBox
-                     id={11}
+                     id={14}
                      title={'Cadelinha atropelada'}
                      description={'A cadelinha Jolie foi atropelada por um carro no bairro Santana e teve que passar por uma cirurgia às pressas.'}
                      value={120.00}
