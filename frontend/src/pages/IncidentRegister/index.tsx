@@ -1,29 +1,31 @@
 import React from 'react';
 import './styles.scss';
 import GenericRegister from "../../components/GenericRegister";
+import { Link } from 'react-router-dom';
 
-export default function Register() {
+export default function IncidentRegister() {
     return(
          <GenericRegister
-             componentId={'ong-register'}
-             title={'Cadastro'}
-             description={'Faça seu cadastro, entre na plataforma e ajude pessoas a encontrarem os casos da sua ONG.'}
+             componentId={'incident-register'}
+             title={'Cadastrar novo caso'}
+             description={'Descreva o caso detalhadamente para encontrar um herói para resolver isso.'}
              link={
                  {
-                     to: '/',
-                     text: 'Voltar para o logon '
+                     to: '/profile',
+                     text: 'Voltar para home'
                  }
-             }>
-            <input placeholder="ONG's Name" />
-            <input type="email" placeholder="email" />
-            <input placeholder="whatsapp" />
+             }
+         >
+            <input type="text" placeholder="Título do caso" />
+            <textarea placeholder="Descrição"></textarea>
+            <input placeholder="Valor em reais" />
 
-            <div className="input-group">
-                <input placeholder="city" />
-                <input placeholder="UF" style={{ width: 73 }} />
+            <div className="button-group">
+                <Link to={'/profile'} className="button outline" style={{ width: 280 }}>Cancelar</Link>
+                <button className="button" type="submit">Cadastrar</button>
             </div>
 
-            <button className="button" type="submit">Cadastrar</button>
+
          </GenericRegister>
     );
 }
