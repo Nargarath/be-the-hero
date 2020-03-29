@@ -1,17 +1,39 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './styles.scss';
 import { FiPower, FiPlus } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import logoImg from '../../assets/svg/logo.svg';
 import IncidentBox from "../../components/IncidentBox";
+import api from "../../services/api";
 
 export default function Profile() {
+    const [incidents, setIncidents] = useState<any[]>([])
+;
+    const ongName = localStorage.getItem('ongName') || 'error';
+    const ongId = localStorage.getItem('ongId') || 'error';
+
+    async function boot() {
+        const response = await api.get('profile', {
+            headers: {
+                Authorization: ongId
+            }
+        });
+        setIncidents(response.data);
+    }
+
+    useEffect(
+        () => {
+            boot()
+        },
+        []
+    );
+
     return(
      <div className="profile-container">
          <nav>
              <div className="box-left">
                  <img src={logoImg} alt={'Be the Hero'}/>
-                 <p>Bem vinda,  APAD</p>
+                 <p>Bem vinda,  {ongName}</p>
              </div>
              <div className="box-right">
                  <Link to="/register-incident" className="button" id="new-incident" >
@@ -23,32 +45,20 @@ export default function Profile() {
              </div>
          </nav>
          <section className="profile-section">
-             <h1>Casos cadastrados</h1>
+             <h1>{ incidents.length > 0 ? 'Casos cadastrados' : 'Nenhum caso cadastrado' }</h1>
              <div className="profile-content-body">
-                <IncidentBox
-                    id={11}
-                    title={'Cadelinha atropelada'}
-                    description={'A cadelinha Jolie foi atropelada por um carro no bairro Santana e teve que passar por uma cirurgia às pressas.'}
-                    value={120.00}
-                />
-                 <IncidentBox
-                     id={12}
-                     title={'Cadelinha atropelada'}
-                     description={'A cadelinha Jolie foi atropelada por um carro no bairro Santana e teve que passar por uma cirurgia às pressas.'}
-                     value={120.00}
-                 />
-                 <IncidentBox
-                     id={13}
-                     title={'Cadelinha atropelada'}
-                     description={'A cadelinha Jolie foi atropelada por um carro no bairro Santana e teve que passar por uma cirurgia às pressas.'}
-                     value={120.00}
-                 />
-                 <IncidentBox
-                     id={14}
-                     title={'Cadelinha atropelada'}
-                     description={'A cadelinha Jolie foi atropelada por um carro no bairro Santana e teve que passar por uma cirurgia às pressas.'}
-                     value={120.00}
-                 />
+                 {
+                     incidents.map(
+                         incident => (
+                             <IncidentBox
+                                 id={incident.id}
+                                 title={incident.title}
+                                 description={incident.description}
+                                 value={incident.value}
+                             />
+                         )
+                     )
+                 }
              </div>
          </section>
      </div>
