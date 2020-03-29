@@ -22,7 +22,7 @@ export default function GenericRegister(props: GenericRegisterContract) {
                     { props.link.text }
                 </Link>
             </section>
-            <form action="">
+            <form onSubmit={props.onSubmit}>
                 {props.children}
             </form>
         </div>

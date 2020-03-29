@@ -7,5 +7,5 @@ export interface GenericRegisterContract {
     title: string,
     description: string,
     children?: any;
-
+    onSubmit?: any;
 }

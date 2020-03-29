@@ -53,12 +53,15 @@
       flex-direction: column;
       align-self: flex-start;
 
-      input {
+      input, textarea {
         margin-top: 8px;
       }
-      .input-group {
+      textarea {
+        height: 175px;
+      }
+      .input-group, .button-group {
         display: flex;
-        input + input {
+        input + input, * + *  {
           margin-left: 8px;
         }
       }
