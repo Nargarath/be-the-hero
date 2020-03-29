@@ -1,7 +1,6 @@
 import React from 'react';
 import { FiTrash2 } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
-import {IncidentBoxContract} from "../../../../backend/src/contracts/IncidentBoxContract";
+import {IncidentBoxContract} from "../../contracts/IncidentBoxContract";
 
 
 
