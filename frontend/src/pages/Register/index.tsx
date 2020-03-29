@@ -3,7 +3,6 @@ import './styles.scss';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import logoImg from '../../assets/svg/logo.svg';
-import heroesImg from '../../assets/svg/heroes.svg';
 
 export default function Register() {
     return(

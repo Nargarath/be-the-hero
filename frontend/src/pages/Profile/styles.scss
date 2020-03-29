@@ -57,6 +57,81 @@
       }
     }
   }
+   & > section {
+     margin-top: 47.46px;
+      h1 {
+        font-family: $fontName;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 36px;
+        color: $header-primary;
+
+      }
+   }
+  .profile-content-body {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(448px, 1fr));
+    column-gap: 32px;
+    margin-top: 31.81px;
+
+    .incident-box {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
+      margin-bottom: 32px;
+
+      padding: 32px;
+      background-color: #fff;
+      border-radius: 8px;
+      transition: .5s box-shadow;
+      cursor: pointer;
+
+
+      &:hover {
+        box-shadow: 0 4px 5px 0 rgba(63,63,63,.1);
+      }
+
+      &-delete {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      &-section-text {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        &:not(:last-of-type) {
+          margin-bottom: 31.81px;
+        }
+
+
+        &-title {
+          font-family: $fontName;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 14px;
+          text-transform: uppercase;
+
+          color: $header-secondary;
+
+          margin-bottom: 16px;
+        }
+        &-content {
+          font-family: $fontName;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 18px;
+          line-height: 24px;
+
+          color: $primary;
+        }
+      }
+    }
+  }
 
 
 }
