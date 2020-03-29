@@ -42,6 +42,12 @@ let IncidentRepository = class IncidentRepository {
             return this.incidents;
         });
     }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const success = yield connection_1.connection('incidents').where('id', id).delete();
+            return success;
+        });
+    }
     paginate(limit = 5, page = 1) {
         return __awaiter(this, void 0, void 0, function* () {
             const [totalItems] = yield connection_1.connection('incidents').count();
@@ -50,7 +56,6 @@ let IncidentRepository = class IncidentRepository {
                 .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
                 .limit(limit)
                 .offset((page - 1) * limit)
-                .select('*')
                 .count();
             const totalPages = Math.floor(totalItems['count(*)'] / limit);
             this.incidents = yield connection_1.connection('incidents')

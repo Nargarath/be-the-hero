@@ -33,6 +33,11 @@ export class IncidentController {
         return this.incidentRepository.fetchOne(id);
     }
 
+    @Delete("/incidents/:id/delete")
+    delete(@Param('id') id: string): Promise<number> {
+        return this.incidentRepository.delete(id);
+    }
+
     @Post("/incidents")
     create(@Body() requestBody: any): Promise<number>  {
         const { title, description, value, ong_id } = requestBody;

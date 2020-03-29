@@ -40,6 +40,9 @@ let IncidentController = class IncidentController {
     one(id) {
         return this.incidentRepository.fetchOne(id);
     }
+    delete(id) {
+        return this.incidentRepository.delete(id);
+    }
     create(requestBody) {
         const { title, description, value, ong_id } = requestBody;
         return this.incidentRepository.save(title, description, value, ong_id);
@@ -59,6 +62,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], IncidentController.prototype, "one", null);
+__decorate([
+    routing_controllers_1.Delete("/incidents/:id/delete"),
+    __param(0, routing_controllers_1.Param('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], IncidentController.prototype, "delete", null);
 __decorate([
     routing_controllers_1.Post("/incidents"),
     __param(0, routing_controllers_1.Body()),

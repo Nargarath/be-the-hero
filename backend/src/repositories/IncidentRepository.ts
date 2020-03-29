@@ -24,6 +24,11 @@ export class IncidentRepository {
         return this.incidents;
     }
 
+    async delete(id: string) {
+        const success = await connection('incidents').where('id', id).delete();
+        return success;
+    }
+
     async paginate(limit = 5, page = 1) {
         const [totalItems] = await connection('incidents').count();
         const nowPage = page;
@@ -31,7 +36,6 @@ export class IncidentRepository {
             .join('ongs', 'ongs.id','=','incidents.ong_id')
             .limit(limit)
             .offset((page - 1) * limit)
-            .select('*')
             .count();
         const totalPages =  Math.floor(totalItems['count(*)']/limit);
         this.incidents = await connection('incidents')
