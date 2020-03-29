@@ -5,12 +5,15 @@ import { Link } from 'react-router-dom';
 import logoImg from '../../assets/svg/logo.svg';
 import IncidentBox from "../../components/IncidentBox";
 import api from "../../services/api";
+import { useHistory } from 'react-router-dom';
 
 export default function Profile() {
     const [incidents, setIncidents] = useState<any[]>([])
 ;
     const ongName = localStorage.getItem('ongName') || 'error';
     const ongId = localStorage.getItem('ongId') || 'error';
+
+    const history = useHistory();
 
     async function boot() {
         const response = await api.get('profile', {
@@ -28,6 +31,12 @@ export default function Profile() {
         []
     );
 
+    function logOut() {
+        localStorage.removeItem('ongName');
+        localStorage.removeItem('ongId');
+        history.push('/');
+    }
+
     return(
      <div className="profile-container">
          <nav>
@@ -39,9 +48,9 @@ export default function Profile() {
                  <Link to="/register-incident" className="button" id="new-incident" >
                      <FiPlus size={24} color="#fff" />
                  </Link>
-                 <Link to="/"  id="logout">
+                 <button id="logout" onClick={logOut}>
                      <FiPower size={24} color="#E02041" />
-                 </Link>
+                 </button>
              </div>
          </nav>
          <section className="profile-section">

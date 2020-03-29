@@ -77,11 +77,23 @@
           }
         }
         #logout {
+          display:flex;
+          align-items: center;
+          justify-content: center;
           width: 60px;
           height: 60px;
           border: 1.5px solid $input-line;
           padding: 16px;
           border-radius: 8px;
+          background: transparent;
+          transition: background,border .3s;
+          &:hover {
+            background: $red-hero;
+            border: none;
+            svg {
+              color: #fff !important;
+            }
+          }
         }
       }
     }

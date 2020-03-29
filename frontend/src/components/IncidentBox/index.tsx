@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 import {IncidentBoxContract} from "../../contracts/IncidentBoxContract";
-
+import api from "../../services/api";
 
 
 function IncidentBox({id, title, description, value}: IncidentBoxContract) {
@@ -13,9 +13,9 @@ function IncidentBox({id, title, description, value}: IncidentBoxContract) {
         console.log('selected' + id);
     }
 
-    const deleteIncident = (e) => {
+    async function deleteIncident(e) {
         e.stopPropagation();
-        console.log('delete ' + id);
+        const response = await api.delete(`incidents/${id}/delete`);
     }
 
     return (
