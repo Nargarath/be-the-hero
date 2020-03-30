@@ -1,8 +1,3 @@
----
-
-
----
-
 <h1 id="be-the-hero">Be the Hero</h1>
 <p>Entire App (back-end api, front-end and mobile app) that people can sponsor some Non-Governmental Organizations on a specific incident registred by them (NGO’s).</p>
 <h2 id="stack">Stack</h2>
